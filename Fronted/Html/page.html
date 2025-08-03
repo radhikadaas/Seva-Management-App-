@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+</head>
+
+
+<body class="bg-gray-800 min-h-screen flex flex-col">
+    
+    <!-- navigation baar -->
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="home.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="../images/logo.png" class="h-8 rounded-full" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ShriHarivansh.in</span>
+            </a>
+           
+            <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
+            <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                <a href="home.html" class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Home</a>
+                </li>
+                <li>
+                    <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Dropdown <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg></button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                        <li>
+                            <a href="home.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                        </li>
+                        
+                        </ul>
+                        <div class="py-1">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
+                </li>
+                
+                <li>
+                <a href="https://www.linkedin.com/in/krishnadaas/" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--notification when the checkbox is clicked and the entry is removed from the database-->
+    <div id="toast-danger" class="hidden items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800" role="alert">
+        <div class="inline-flex items-center justify-center shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+            </svg>
+            <span class="sr-only">Error icon</span>
+        </div>
+        <div class="ms-3 text-sm font-normal ">सेवा हटाई जा चुकी है</div>
+        <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-danger" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+
+    <main class="flex-grow">
+        <!-- Updated layout section for page.html -->
+        <div class="my-8 px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+
+            <!-- Left: नई सेवा जोड़ें Button -->
+            <div>
+                <button
+                type="button"
+                onclick="window.location.href='home.html'"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-700 rounded-lg hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:border-blue-700 dark:text-white dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                नई सेवा जोड़ें
+                </button>
+            </div>
+
+            <!--  पाठ सेवा देखे Button -->
+            <div>
+                <button
+                type="button"
+                onclick="window.location.href='date.html'"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-700 rounded-lg hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:border-blue-700 dark:text-white dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                पाठ सेवा देखे            
+                </button>
+            </div>
+
+            <!--  Search Button -->
+            <form id="search-form" class="flex items-stretch gap-0 max-w-2xl w-full">
+            <!-- 🔘 Radio Dropdown for Category -->
+                <div class="relative">
+                    <button id="dropdownRadioButton" data-dropdown-toggle="dropdownDefaultRadio"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium bg-gray-100 text-gray-900 border border-gray-300 rounded-s-lg hover:bg-gray-600 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    type="button">
+                        <span id="selected-category" class="whitespace-nowrap w-max inline-block">श्रेणियाँ</span>
+                        <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                        </svg>
+                    </button>
+
+                    <div id="dropdownDefaultRadio"
+                    class="z-10 hidden w-48 absolute bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600">
+                    <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
+                        <li>
+                        <div class="flex items-center">
+                            <input id="radio-paath" type="radio" value="paath_name" name="search-radio"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                            data-label="पाथ का नाम">
+                            <label for="radio-paath"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">पाथ का नाम</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="flex items-center">
+                            <input id="radio-person" type="radio" value="person_name" name="search-radio"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                            data-label="व्यक्ति का नाम">
+                            <label for="radio-person"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">व्यक्ति का नाम</label>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="flex items-center">
+                            <input id="radio-gotra" type="radio" value="gotra_name" name="search-radio"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                            data-label="गोत्र का नाम">
+                            <label for="radio-gotra"
+                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">गोत्र का नाम</label>
+                        </div>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+
+                <!-- 🔎 Search Field -->
+                <div class="relative w-full">
+                    <input type="text" id="search-input" name="search" placeholder="Search..."
+                    class="block w-full px-4 py-2 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-e-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                    required />
+                </div>
+
+                <!-- 🔘 Search Button -->
+                <button type="submit"
+                    class="ml-2 inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    खोजें
+                </button>
+            </form>
+
+            <!-- Right: Sort Dropdown (Radio-style) -->
+            <div class="relative">
+                <button id="sortRadioButton" data-dropdown-toggle="sortRadioDropdown" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                    पाठ का क्रम
+                    <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+                <div id="sortRadioDropdown" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600">
+                    <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200">
+                    <li>
+                        <div class="flex items-center">
+                        <input id="sort-radio-asc" type="radio" value="asc" name="sort-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500" />
+                        <label for="sort-radio-asc" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">आने वाले</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                        <input id="sort-radio-desc" type="radio" value="desc" name="sort-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500" checked />
+                        <label for="sort-radio-desc" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">बाद के</label>
+                        </div>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      
+        <!--table to show entries-->
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-md text text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            पाथ का नाम
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            व्यक्ति का नाम
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            गोत्र का नाम
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            प्रारम्भ
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            विश्राम
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            पाठ समापन
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                                    
+                </tbody>
+            </table>
+        </div>
+    
+        <!-- trash button -->
+        <!-- Trash button aligned to the rightmost part -->
+        <div class="flex justify-end items-center w-full mb-4 pr-4 my-6">
+            <button
+                type="button"
+                onclick="window.location.href='trash.html'"
+                class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+            >
+                Trash🗑️
+            </button>
+        </div>
+    </main>
+
+    
+
+    <footer class="bg-white dark:bg-gray-900">
+        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+            <div class="md:flex md:justify-between">
+            <div class="mb-6 md:mb-0">
+                <a href="home.html" class="flex items-center">
+                <img src="../images/logo.png" class="h-8 me-3 rounded-full" alt="ShriHarivansh Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ShriHarivansh.in</span>
+                </a>
+            </div>
+            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2">
+                <div>
+                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
+                <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                    <li class="mb-4">
+                    <a href="https://github.com/radhikadaas" class="hover:underline">GitHub</a>
+                    </li>
+                    <li>
+                    <a href="https://www.linkedin.com/in/krishnadaas/" class="hover:underline">LinkedIn</a>
+                    </li>
+                </ul>
+                </div>
+                <div>
+                <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+                <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                    <li class="mb-4">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    </li>
+                    <li>
+                    <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+            </div>
+
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+
+            <div class="sm:flex sm:items-center sm:justify-between">
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+                © 2025 <a href="home.html" class="hover:underline">ShriHarivansh.in™</a>. All Rights Reserved.
+            </span>
+
+            <!-- Social Icons -->
+            <div class="flex mt-4 sm:justify-center sm:mt-0 space-x-5">
+                <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white" aria-label="Facebook">
+                <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white" aria-label="Twitter">
+                <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="https://github.com/radhikadaas" class="text-gray-500 hover:text-gray-900 dark:hover:text-white" aria-label="GitHub">
+                <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/krishnadaas/" class="text-gray-500 hover:text-gray-900 dark:hover:text-white" aria-label="LinkedIn">
+                <i class="fab fa-linkedin text-xl"></i>
+                </a>
+            </div>
+            </div>
+        </div>
+    </footer>    
+
+   <script src="../js/page.js"></script>
+   
+</body>
+</html>
+
+
