@@ -53,7 +53,7 @@ function attachCheckboxHandlers() {
     checkbox.addEventListener("change", async function () {
       const id = this.dataset.id;
       try {
-        const res = await fetch(`https://shriharivansh-backend.onrender.com/trash/${id}/restore`, {
+        const res = await fetch(`https://seva-management-app.onrender.com/trash/${id}/restore`, {
           method: "PATCH",
         });
         if (!res.ok) throw new Error("Restore failed");
@@ -69,7 +69,7 @@ function attachCheckboxHandlers() {
     checkbox.addEventListener("change", async function () {
       const id = this.dataset.id;
       try {
-        const res = await fetch(`https://shriharivansh-backend.onrender.com/trash/${id}`, {
+        const res = await fetch(`https://seva-management-app.onrender.com/trash/${id}`, {
           method: "DELETE",
         });
         if (!res.ok) throw new Error("Permanent delete failed");
@@ -84,7 +84,7 @@ function attachCheckboxHandlers() {
 
 async function fetchTrashEntries() {
   try {
-    const res = await fetch("https://shriharivansh-backend.onrender.com/trash");
+    const res = await fetch("https://seva-management-app.onrender.com/trash");
     if (!res.ok) throw new Error("Failed to fetch trash entries");
     const data = await res.json();
     renderTable(data);

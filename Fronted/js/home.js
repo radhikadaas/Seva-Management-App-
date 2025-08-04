@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Payload being sent:", payload);
 
     try {
-      const res = await fetch("https://shriharivansh-backend.onrender.com/data", {
+      const res = await fetch("https://seva-management-app.onrender.com/data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

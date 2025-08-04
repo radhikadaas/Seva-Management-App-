@@ -39,7 +39,7 @@ function renderTable(entries) {
 }
 
 function fetchAndRender() {
-  fetch("https://shriharivansh-backend.onrender.com/data")
+  fetch("https://seva-management-app.onrender.com/data")
     .then((res) => res.json())
     .then((data) => {
       allEntries = data;
@@ -77,7 +77,7 @@ function attachDeleteHandlers() {
     checkbox.addEventListener("change", async function () {
       const id = this.dataset.id;
       try {
-        const res = await fetch(`https://shriharivansh-backend.onrender.com/data/${id}`, {
+        const res = await fetch(`https://seva-management-app.onrender.com/data/${id}`, {
           method: "DELETE",
         });
         if (!res.ok) throw new Error("Failed to delete");
@@ -116,7 +116,7 @@ searchForm.addEventListener("submit", async (e) => {
 
   try {
     const res = await fetch(
-      `https://shriharivansh-backend.onrender.com/search?field=${encodeURIComponent(
+      `https://seva-management-app.onrender.com/search?field=${encodeURIComponent(
         currentSearchField
       )}&query=${encodeURIComponent(query)}`
     );
