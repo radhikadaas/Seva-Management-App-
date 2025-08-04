@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: shriharivansh-backend
+    name: Seva-Management-App-  # Match the Render service name
     env: python
     region: oregon
     buildCommand: "pip install -r requirements.txt"
@@ -13,5 +13,5 @@ services:
         sync: false
       - key: SUPABASE_TABLE
         sync: false
-      - key: DATABASE_URL
+      - key: POSTGRES_URL  # ✅ Updated from DATABASE_URL
         sync: false
