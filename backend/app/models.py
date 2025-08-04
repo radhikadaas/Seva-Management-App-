@@ -6,7 +6,7 @@ from .database import Base
 class SevaEntry(Base):
     __tablename__ = "seva_entries"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     paath_name = Column(String)
     person_name = Column(String)
     gotra_name = Column(String)
