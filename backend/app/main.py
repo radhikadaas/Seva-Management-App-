@@ -14,6 +14,7 @@ from .models import SevaEntry
 from .database import get_db
 from dotenv import load_dotenv
 from contextlib import asynccontextmanager
+from .database import engine
 
 load_dotenv()
 
@@ -33,10 +34,13 @@ HEADERS = {
 }
 
 @asynccontextmanager
+
 async def lifespan(app: FastAPI):
     logger.info("🚀 FastAPI application started")
     logger.info(f"🔐 SUPABASE_URL: {SUPABASE_URL}")
     logger.info(f"🔐 POSTGRES_URL: {os.getenv('POSTGRES_URL')}")
+    logging.info("🛠️ Creating tables if they don't exist...")
+    models.Base.metadata.create_all(bind=engine)
     yield
     logger.info("🛑 FastAPI shutting down")
 
@@ -49,6 +53,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/debug/tables")
+def list_tables():
+    from sqlalchemy import inspect
+    inspector = inspect(engine)
+    return inspector.get_table_names()
+
 
 @app.get("/search")
 def search_entries(field: str = Query(...), query: str = Query(...), db: Session = Depends(get_db)):
