@@ -22,6 +22,9 @@ engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+# 🔧 This line creates all tables defined with `Base` (e.g., SevaEntry)
+Base.metadata.create_all(bind=engine)
+
 # Dependency to inject DB session
 def get_db():
     db = SessionLocal()
