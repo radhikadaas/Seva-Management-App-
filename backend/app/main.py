@@ -54,13 +54,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/debug/tables")
-def list_tables():
-    from sqlalchemy import inspect
-    inspector = inspect(engine)
-    return inspector.get_table_names()
-
-
 @app.get("/search")
 def search_entries(field: str = Query(...), query: str = Query(...), db: Session = Depends(get_db)):
     logger.info(f"🔍 GET /search with field={field} and query={query}")
@@ -116,10 +109,12 @@ async def get_trashed_entries():
 async def restore_entry(entry_id: int, db: Session = Depends(get_db)):
     logger.info(f"♻️ PATCH /trash/{entry_id}/restore called")
     try:
+        # 1. Mark as restored in Supabase
         url = f"{SUPABASE_URL}/rest/v1/{SUPABASE_TABLE}?id=eq.{entry_id}"
         patch_res = httpx.patch(url, headers=HEADERS, json={"check": True})
         patch_res.raise_for_status()
 
+        # 2. Fetch restored data from Supabase
         fetch_res = httpx.get(url, headers=HEADERS)
         fetch_res.raise_for_status()
         data = fetch_res.json()
@@ -128,14 +123,23 @@ async def restore_entry(entry_id: int, db: Session = Depends(get_db)):
             raise HTTPException(status_code=404, detail="Entry not found in Supabase")
 
         entry_data = data[0]
-        new_entry = SevaEntry(**entry_data)
+
+        # 3. Filter out 'check' and any other non-model fields
+        allowed_fields = {c.name for c in SevaEntry.__table__.columns}
+        filtered_data = {k: v for k, v in entry_data.items() if k in allowed_fields}
+
+        # 4. Save to Postgres
+        new_entry = SevaEntry(**filtered_data)
         db.merge(new_entry)
         db.commit()
+
         logger.info("✅ Entry restored and committed to DB")
         return {"detail": "Restored and saved to Postgres"}
+
     except Exception as e:
         logger.error(f"❌ Error restoring entry: {e}")
         raise HTTPException(status_code=500, detail="Failed to restore entry")
+
 
 @app.delete("/trash/{entry_id}")
 async def delete_entry_permanently(entry_id: int):
